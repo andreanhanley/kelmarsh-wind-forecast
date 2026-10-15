@@ -1,0 +1,11 @@
+name: tests                        # label shown in the Actions tab
+on: [push, pull_request]           # when to run: every push and every pull request
+jobs:                              # the work to do
+  test:                            # this job's name; you'll see "test" in the logs
+    runs-on: ubuntu-latest         # a fresh Linux computer that GitHub provides free
+    steps:                         # done in order, top to bottom; each "-" is one step
+      - uses: actions/checkout@v7          # copy your repo onto that computer
+      - uses: actions/setup-python@v6      # install Python...
+        with: { python-version: "3.11" }   # ...version 3.11
+      - run: pip install -e . pytest       # install your project, plus pytest
+      - run: pytest    
